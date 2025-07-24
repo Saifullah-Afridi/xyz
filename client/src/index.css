@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -15,6 +17,8 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
+  /* --color-primary: #4fbf8b; */
+  /* --color-primary-dull: #44ae7c;  */
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -117,4 +121,8 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+* {
+  default---default-font-family: "Outfit", sans-serif;
 }
