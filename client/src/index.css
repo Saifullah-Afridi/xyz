@@ -126,3 +126,9 @@
 * {
   default---default-font-family: "Outfit", sans-serif;
 }
+
+@layer components {
+  .custom-container {
+    @apply max-w-[1370px] mx-auto;
+  }
+}
