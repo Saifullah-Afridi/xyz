@@ -129,6 +129,6 @@
 
 @layer components {
   .custom-container {
-    @apply max-w-[1370px] mx-auto;
+    @apply max-w-[1390px] mx-auto;
   }
 }

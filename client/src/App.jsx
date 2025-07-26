@@ -3,6 +3,7 @@ import Home from "./pages/Home";
 import RootLayout from "./layout/RootLayout";
 import Contact from "./pages/Contact";
 import AllProducts from "./pages/AllProducts";
+import Cart from "./pages/Cart";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -25,6 +26,14 @@ const App = () => {
         {
           path: "/all-products",
           Component: AllProducts,
+        },
+        {
+          path: "/cart",
+          Component: Cart,
+        },
+        {
+          path: "/my-orders",
+          Component: Cart,
         },
       ],
     },
