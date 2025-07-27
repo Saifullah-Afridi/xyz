@@ -44,7 +44,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sub-heading: #2d7a65;
-  --color-text: #6b7280;
+  --color-body-text: #6b7280;
 }
 
 :root {
