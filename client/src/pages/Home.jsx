@@ -3,7 +3,7 @@ import HeroSection from "../components/ui/customComponents/HeroSection";
 
 const Home = () => {
   return (
-    <div className="custom-container mt-10">
+    <div className="custom-container sm:mt-10 mt-2">
       <HeroSection />
     </div>
   );
