@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 
 const Categories = () => {
   return (
-    <div className="my-10 mb-[200px]">
+    <div className="my-10 ">
       <h2 className="text-2xl font-semibold text-[#2d7a65] text-center sm:text-left">
         Categories
       </h2>
-      <div className="flex   sm:flex-row justify-between p-2 sm:p-0 space-y-4 sm:space-x-2 flex-wrap sm:flex-nowrap mt-5">
+      <div className="flex   sm:flex-row justify-between p-2 sm:p-0 space-y-4 sm:space-x-4 flex-wrap sm:flex-nowrap mt-5">
         {categories?.map((category) => (
           <Link
             key={category.text}
-            to={`/${category.path}`}
+            to={`/allproducts/${category.path}`}
             className=" w-[170px]  sm:w-[220px] hover:scale-110 transition-all duration-200 ease-in-out "
           >
             <div

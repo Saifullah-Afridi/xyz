@@ -841,3 +841,221 @@ export const dummyOrders = [
     updatedAt: "2025-03-25T07:17:13.068Z",
   },
 ];
+
+export const bestSellingProducts = [
+  {
+    _id: "gd46g23h",
+    name: "Potato 500g",
+    category: "Vegetables",
+    price: 25,
+    offerPrice: 20,
+    image: [potato_image_1, potato_image_2, potato_image_3, potato_image_4],
+    description: [
+      "Fresh and organic",
+      "Rich in carbohydrates",
+      "Ideal for curries and fries",
+    ],
+    totalSold: 1250,
+    numberOfReviews: 489,
+    averageRating: 4.3,
+    inStock: true,
+    bestSellerRank: 1,
+  },
+  {
+    _id: "ek51j12k",
+    name: "Apple 1 kg",
+    category: "Fruits",
+    price: 120,
+    offerPrice: 110,
+    image: [apple_image],
+    description: [
+      "Crisp and juicy",
+      "Rich in fiber",
+      "Boosts immunity",
+      "Perfect for snacking and desserts",
+      "Organic and farm fresh",
+    ],
+    totalSold: 920,
+    numberOfReviews: 367,
+    averageRating: 4.6,
+    inStock: true,
+    bestSellerRank: 2,
+  },
+  {
+    _id: "ek56j67k",
+    name: "Amul Milk 1L",
+    category: "Dairy",
+    price: 60,
+    offerPrice: 55,
+    image: [amul_milk_image],
+    description: [
+      "Pure and fresh",
+      "Rich in calcium",
+      "Ideal for tea, coffee, and desserts",
+      "Trusted brand quality",
+    ],
+    totalSold: 875,
+    numberOfReviews: 234,
+    averageRating: 4.5,
+    inStock: true,
+    bestSellerRank: 3,
+  },
+  {
+    _id: "gd47g34h",
+    name: "Tomato 1 kg",
+    category: "Vegetables",
+    price: 40,
+    offerPrice: 35,
+    image: [tomato_image],
+    description: [
+      "Juicy and ripe",
+      "Rich in Vitamin C",
+      "Perfect for salads and sauces",
+      "Farm fresh quality",
+    ],
+    totalSold: 784,
+    numberOfReviews: 312,
+    averageRating: 4.2,
+    inStock: true,
+    bestSellerRank: 4,
+  },
+  {
+    _id: "ek66j67k",
+    name: "Basmati Rice 5kg",
+    category: "Grains",
+    price: 550,
+    offerPrice: 520,
+    image: [basmati_rice_image],
+    description: [
+      "Long grain and aromatic",
+      "Perfect for biryani and pulao",
+      "Premium quality",
+    ],
+    totalSold: 698,
+    numberOfReviews: 156,
+    averageRating: 4.7,
+    inStock: true,
+    bestSellerRank: 5,
+  },
+  {
+    _id: "ek53j34k",
+    name: "Banana 1 kg",
+    category: "Fruits",
+    price: 50,
+    offerPrice: 45,
+    image: [banana_image_1],
+    description: [
+      "Sweet and ripe",
+      "High in potassium",
+      "Great for smoothies and snacking",
+    ],
+    totalSold: 643,
+    numberOfReviews: 289,
+    averageRating: 4.1,
+    inStock: true,
+    bestSellerRank: 6,
+  },
+  {
+    _id: "gd50g67h",
+    name: "Onion 500g",
+    category: "Vegetables",
+    price: 22,
+    offerPrice: 19,
+    image: [onion_image_1],
+    description: [
+      "Fresh and pungent",
+      "Perfect for cooking",
+      "A kitchen staple",
+    ],
+    totalSold: 589,
+    numberOfReviews: 198,
+    averageRating: 4.0,
+    inStock: true,
+    bestSellerRank: 7,
+  },
+  {
+    _id: "ek67j78k",
+    name: "Wheat Flour 5kg",
+    category: "Grains",
+    price: 250,
+    offerPrice: 230,
+    image: [wheat_flour_image],
+    description: [
+      "High-quality whole wheat",
+      "Soft and fluffy rotis",
+      "Rich in nutrients",
+    ],
+    totalSold: 567,
+    numberOfReviews: 124,
+    averageRating: 4.4,
+    inStock: true,
+    bestSellerRank: 8,
+  },
+  {
+    _id: "ek58j89k",
+    name: "Eggs 12 pcs",
+    category: "Dairy",
+    price: 90,
+    offerPrice: 85,
+    image: [eggs_image],
+    description: [
+      "Farm fresh",
+      "Rich in protein",
+      "Ideal for breakfast and baking",
+    ],
+    totalSold: 534,
+    numberOfReviews: 167,
+    averageRating: 4.3,
+    inStock: true,
+    bestSellerRank: 9,
+  },
+  {
+    _id: "ek61j12k",
+    name: "Coca-Cola 1.5L",
+    category: "Drinks",
+    price: 80,
+    offerPrice: 75,
+    image: [coca_cola_image],
+    description: [
+      "Refreshing and fizzy",
+      "Perfect for parties and gatherings",
+      "Best served chilled",
+    ],
+    totalSold: 498,
+    numberOfReviews: 145,
+    averageRating: 4.2,
+    inStock: true,
+    bestSellerRank: 10,
+  },
+];
+
+// Helper function to get top N best sellers
+export const getTopBestSellers = (count = 10) => {
+  return bestSellingProducts.slice(0, count);
+};
+
+// Helper function to get best sellers by category
+export const getBestSellersByCategory = (category) => {
+  return bestSellingProducts.filter((product) => product.category === category);
+};
+
+// Helper function to calculate discount percentage
+export const calculateDiscountPercentage = (originalPrice, offerPrice) => {
+  return Math.round(((originalPrice - offerPrice) / originalPrice) * 100);
+};
+
+// Enhanced product data with additional computed properties
+export const bestSellersWithExtras = bestSellingProducts.map((product) => ({
+  ...product,
+  discountPercentage: calculateDiscountPercentage(
+    product.price,
+    product.offerPrice
+  ),
+  savings: product.price - product.offerPrice,
+  isHighRated: product.averageRating >= 4.5,
+  isPopular: product.numberOfReviews >= 200,
+  ratingStars:
+    "★".repeat(Math.floor(product.averageRating)) +
+    (product.averageRating % 1 >= 0.5 ? "☆" : "") +
+    "☆".repeat(5 - Math.ceil(product.averageRating)),
+}));
