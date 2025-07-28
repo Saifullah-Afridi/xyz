@@ -1,13 +1,5 @@
 import { createContext, useContext, useState } from "react";
 
-item = {
-  name,
-  price,
-  description,
-  quantity,
-  _id,
-};
-
 const cartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
@@ -19,6 +11,10 @@ const CartContextProvider = ({ children }) => {
     setNumberOfCartItems(totalCount);
   };
 
+  //this function add  item to the cart
+  //it will also check the the item is already in the cart
+  //   if the item is already in cart it will update the quantity only
+  // and will not add the item again
   const addToCart = (newCartItems) => {
     const existingItem = cartItems?.find(
       (citem) => newCartItems._id === citem._id
@@ -37,6 +33,7 @@ const CartContextProvider = ({ children }) => {
     updateCartItemCount(newItems);
   };
 
+  //Delete cart item form cart
   const deleteFromCart = (item) => {
     const filteredItems = cartItems?.filter((citem) => citem._id !== item._id);
     setCartItems(filteredItems);
@@ -92,8 +89,8 @@ const CartContextProvider = ({ children }) => {
   return <cartContext.Provider value={value}>{children}</cartContext.Provider>;
 };
 
-const cart = () => {
+const useCart = () => {
   return useContext(cartContext);
 };
 
-export { cartContext, CartContextProvider, cart };
+export { cartContext, CartContextProvider, useCart };
