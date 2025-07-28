@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IoStar } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
 import { useCart } from "../../../context/CartContext";
+import { toast } from "sonner";
 
 const ProductCard = ({ product }) => {
   const { _id, name, category, price, image, numberOfReviews, offerPrice } =
@@ -24,12 +25,13 @@ const ProductCard = ({ product }) => {
   const addItem = (numberOfItems) => {
     const updatedItem = { ...product, quantity: numberOfItems };
     addToCart(updatedItem);
+    setNumberOfItems(1);
   };
 
   console.log(cartItems);
 
   return (
-    <div className="border-[1px] border-gray-200 p-3  rounded-sm hover:shadow-xl cursor-pointer transition-all duration-150 ease-in-out ">
+    <div className="border-[1px] sm:border-gray-200 border-gray-400 p-3  rounded-sm hover:shadow-xl cursor-pointer transition-all duration-150 ease-in-out ">
       <div className=" flex flex-col items-center">
         <img
           src={image[0]}
@@ -78,6 +80,7 @@ const ProductCard = ({ product }) => {
             className="flex gap-1 items-center bg-primary  px-6 py-1 rounded-md cursor-pointer hover:bg-[#16a34a]  text-white "
             onClick={() => {
               addItem(numberOfItems);
+              toast.success("item added successfully");
             }}
           >
             <IoCartOutline />

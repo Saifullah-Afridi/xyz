@@ -68,7 +68,7 @@ const NavBar = () => {
     setOpen(false);
   };
   return (
-    <header className="shadow-sm bg-[#1a5d4a] text-white ">
+    <header className="shadow-sm bg-[#1a5d4a] text-white sticky inset-0 z-[999] ">
       <nav className="py-3 px-3">
         {/* desktop navigation bar */}
 
