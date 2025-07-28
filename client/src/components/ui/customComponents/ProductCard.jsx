@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
     if (numberOfItems === 1) {
       return;
     }
-    setNumberOfItems((prev) => prev + 1);
+    setNumberOfItems((prev) => prev - 1);
   };
 
   const addItem = (numberOfItems) => {

@@ -4,7 +4,7 @@ import { bestSellingProducts, dummyProducts } from "../../../assets/assets";
 
 const BestSeller = () => {
   return (
-    <div className="my-10 mb-[200px] ">
+    <div className="my-10">
       <h2 className="text-2xl font-semibold text-[#2d7a65] text-center sm:text-left">
         Best Seller
       </h2>
