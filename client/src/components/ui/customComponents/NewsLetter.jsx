@@ -1,9 +1,7 @@
-import React from "react";
-
 const NewsLetter = () => {
   return (
     <div className=" flex flex-col items-center justify-center gap-4 my-10">
-      <h2 className="text-[#6b7280]  text-2xl  sm:text-3xl font-semibold text-center flex ">
+      <h2 className="text-[#6b7280]  text-2xl  sm:text-3xl font-bold text-center flex ">
         Never Miss a Deal!
       </h2>
       <p className="text-center text-body-text">
