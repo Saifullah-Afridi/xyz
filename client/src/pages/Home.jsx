@@ -1,4 +1,3 @@
-import React from "react";
 import HeroSection from "../components/ui/customComponents/HeroSection";
 import Categories from "../components/ui/customComponents/Categories";
 import BestSeller from "../components/ui/customComponents/BestSeller";

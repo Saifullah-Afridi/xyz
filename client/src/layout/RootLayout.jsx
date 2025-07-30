@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "../components/ui/customComponents/NavBar";
 import { Outlet } from "react-router-dom";
 import { AppContextProvider } from "../context/AppContext";
+import Footer from "../components/ui/customComponents/Footer";
 
 const RootLayout = () => {
   return (
@@ -11,6 +12,7 @@ const RootLayout = () => {
         <React.Fragment>
           <Outlet />
         </React.Fragment>
+        <Footer />
       </AppContextProvider>
     </div>
   );

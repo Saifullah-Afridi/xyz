@@ -1,6 +1,6 @@
 const NewsLetter = () => {
   return (
-    <div className=" flex flex-col items-center justify-center gap-4 my-10">
+    <div className=" flex flex-col items-center justify-center gap-4 my-20">
       <h2 className="text-[#6b7280]  text-2xl  sm:text-3xl font-bold text-center flex ">
         Never Miss a Deal!
       </h2>
