@@ -17,6 +17,7 @@ import {
   FcPhoneAndroid,
 } from "react-icons/fc";
 import { useCart } from "../../../context/CartContext";
+import Login from "./Login";
 
 const NavBar = () => {
   const { user, setUser, isLogin, setIsLogin } = appContextValue();
@@ -48,11 +49,6 @@ const NavBar = () => {
   const handleLogout = () => {
     setUser(null);
     setIsLogin(false);
-  };
-
-  const handleLogin = () => {
-    setIsLogin(true);
-    setUser({});
   };
 
   const handleSearchSubmitt = () => {
@@ -122,12 +118,7 @@ const NavBar = () => {
                 </Link>
               </div>
               {!user && !isLogin ? (
-                <button
-                  className="bg-green-500 cursor-pointer px-6 py-2 text-white rounded-md hover:bg-green-600  transition-all duration-200 ease-in-out"
-                  onClick={handleLogin}
-                >
-                  Login
-                </button>
+                <Login />
               ) : (
                 <div className="relative">
                   <div
