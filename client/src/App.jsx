@@ -4,8 +4,6 @@ import RootLayout from "./layout/RootLayout";
 import Contact from "./pages/Contact";
 import AllProducts from "./pages/AllProducts";
 import Cart from "./pages/Cart";
-import Login from "./pages/Login";
-import Regsiter from "./pages/Regsiter";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -36,14 +34,6 @@ const App = () => {
         {
           path: "my-orders",
           Component: Cart,
-        },
-        {
-          path: "login",
-          Component: Login,
-        },
-        {
-          path: "register",
-          Component: Regsiter,
         },
       ],
     },
