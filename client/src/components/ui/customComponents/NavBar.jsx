@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { assets } from "../../../assets/assets";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
   IoCaretDown,
   IoCaretUp,
@@ -18,13 +18,15 @@ import {
 } from "react-icons/fc";
 import { useCart } from "../../../context/CartContext";
 import Login from "./Login";
+import { productContextValue } from "../../../context/ProductContext";
 
 const NavBar = () => {
   const { user, setUser, isLogin, setIsLogin } = appContextValue();
   const [toggleDropDown, setToggleDropDown] = useState(false);
-  const [searchTerm, setSearchTerm] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [open, setOpen] = useState(false);
-
+  const { setSearchQueryForProduct } = productContextValue();
+  const navigate = useNavigate();
   const { numberofCartItems } = useCart();
 
   const navigationItem = [
@@ -53,7 +55,7 @@ const NavBar = () => {
 
   const handleSearchSubmitt = () => {
     e.preventDefault();
-    console.log(searchTerm);
+    setSearchQueryForProduct(setSearchTerm);
   };
 
   const handleOpenDrawer = () => {
@@ -63,6 +65,15 @@ const NavBar = () => {
   const handleCloseDrawer = () => {
     setOpen(false);
   };
+
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+      setSearchQueryForProduct("");
+    } else {
+      setSearchQueryForProduct(searchTerm);
+      navigate("/all-products");
+    }
+  }, [searchTerm]);
   return (
     <header className="shadow-sm bg-[#1a5d4a] text-white sticky inset-0 z-[999] ">
       <nav className="py-3 px-3">

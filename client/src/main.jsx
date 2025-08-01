@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App.jsx";
 import { CartContextProvider } from "./context/CartContext.jsx";
 import { Toaster } from "sonner";
+import { ProductContextProvider } from "./context/ProductContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <CartContextProvider>
-      <App />
+      <ProductContextProvider>
+        <App />
+      </ProductContextProvider>
       <Toaster richColors dir="ltr" position="top-center" closeButton />
     </CartContextProvider>
   </StrictMode>
