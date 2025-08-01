@@ -1,8 +1,15 @@
 import React from "react";
 import { categories } from "../../../assets/assets";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { productContextValue } from "../../../context/ProductContext";
 
 const Categories = () => {
+  const { setSelectedCategory } = productContextValue();
+  const navigate = useNavigate();
+  const handleCategoryClick = () => {
+    navigate(`/all-products`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className="my-10 ">
       <h2 className="text-2xl font-semibold text-[#2d7a65] text-center sm:text-left">
@@ -10,10 +17,13 @@ const Categories = () => {
       </h2>
       <div className="flex   sm:flex-row justify-between p-2 sm:p-0 space-y-4 sm:space-x-4 flex-wrap sm:flex-nowrap mt-5">
         {categories?.map((category) => (
-          <Link
+          <div
             key={category.text}
-            to={`/all-products/${category.path.toLowerCase()}`}
-            className=" w-[170px]  sm:w-[220px] hover:scale-110 transition-all duration-200 ease-in-out "
+            onClick={() => {
+              setSelectedCategory();
+              handleCategoryClick(category.path);
+            }}
+            className=" w-[170px]  sm:w-[220px] hover:scale-110 transition-all duration-200 ease-in-out cursor-pointer "
           >
             <div
               style={{ backgroundColor: `${category.bgColor}` }}
@@ -26,7 +36,7 @@ const Categories = () => {
               />
               <span className="text-[#6b7280]">{category.text}</span>
             </div>
-          </Link>
+          </div>
         ))}
       </div>
     </div>

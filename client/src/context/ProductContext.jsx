@@ -6,21 +6,27 @@ const productContext = createContext();
 const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState(dummyProducts || []);
   const [searchQueryForProduct, setSearchQueryForProduct] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   console.log(dummyProducts);
 
   useEffect(() => {
-    if (searchQueryForProduct === "") {
-      return setProducts(dummyProducts);
-    } else {
-      const filteredProducts = products?.filter((product) =>
-        product?.name
-          ?.toLowerCase()
+    let filterdProducts = dummyProducts;
+    if (selectedCategory) {
+      filterdProducts = filterdProducts.filter(
+        (product) =>
+          product.category.toLowerCase() === selectedCategory.toLowerCase()
+      );
+    }
+    if (searchQueryForProduct.trim()) {
+      filterdProducts = filterdProducts.filter((product) =>
+        product.name
+          .toLowerCase()
           .startsWith(searchQueryForProduct.toLowerCase())
       );
-      setProducts(filteredProducts);
     }
-  }, [searchQueryForProduct]);
+    setProducts(filterdProducts);
+  }, [searchQueryForProduct, selectedCategory]);
   return (
     <productContext.Provider
       value={{
@@ -28,6 +34,8 @@ const ProductContextProvider = ({ children }) => {
         setProducts,
         searchQueryForProduct,
         setSearchQueryForProduct,
+        selectedCategory,
+        setSelectedCategory,
       }}
     >
       {children}
