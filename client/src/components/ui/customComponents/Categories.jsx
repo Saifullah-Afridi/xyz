@@ -12,7 +12,7 @@ const Categories = () => {
         {categories?.map((category) => (
           <Link
             key={category.text}
-            to={`/allproducts/${category.path}`}
+            to={`/all-products/${category.path.toLowerCase()}`}
             className=" w-[170px]  sm:w-[220px] hover:scale-110 transition-all duration-200 ease-in-out "
           >
             <div
