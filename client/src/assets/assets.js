@@ -205,6 +205,7 @@ export const dummyProducts = [
     _id: "gd46g23h",
     name: "Potato 500g",
     category: "Vegetables",
+    numberOfReivews: 509,
     price: 25,
     offerPrice: 20,
     image: [potato_image_1, potato_image_2, potato_image_3],
