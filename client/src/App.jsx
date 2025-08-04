@@ -4,6 +4,7 @@ import RootLayout from "./layout/RootLayout";
 import Contact from "./pages/Contact";
 import AllProducts from "./pages/AllProducts";
 import Cart from "./pages/Cart";
+import ProductDetail from "./pages/ProductDetail";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const App = () => {
         {
           path: "all-products",
           Component: AllProducts,
+        },
+        {
+          path: "product-detail/:category/:name",
+          Component: ProductDetail,
         },
         {
           path: "cart",

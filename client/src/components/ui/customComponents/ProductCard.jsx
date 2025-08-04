@@ -3,6 +3,7 @@ import { IoStar } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
 import { useCart } from "../../../context/CartContext";
 import { toast } from "sonner";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { _id, name, category, price, image, numberOfReviews, offerPrice } =
@@ -28,10 +29,15 @@ const ProductCard = ({ product }) => {
     setNumberOfItems(1);
   };
 
-  console.log(cartItems);
-
   return (
-    <div className="border-[1px] sm:border-gray-200 border-gray-400 p-3  rounded-sm hover:shadow-xl cursor-pointer transition-all duration-150 ease-in-out ">
+    <Link
+      to={`/product-detail/${category.toLowerCase()}/${name
+        .toLowerCase()
+        .trim()
+        .split(" ")
+        .join("")}`}
+      className="border-[1px] sm:border-gray-200 border-gray-400 p-3  rounded-sm hover:shadow-xl cursor-pointer transition-all duration-150 ease-in-out "
+    >
       <div className=" flex flex-col items-center">
         <img
           src={image[0]}
@@ -88,7 +94,7 @@ const ProductCard = ({ product }) => {
           </button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

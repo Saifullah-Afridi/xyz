@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { dummyAddress, dummyProducts } from "../assets/assets";
+import { dummyProducts } from "../assets/assets";
 
 const productContext = createContext();
 
@@ -8,7 +8,13 @@ const ProductContextProvider = ({ children }) => {
   const [searchQueryForProduct, setSearchQueryForProduct] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  console.log(dummyProducts);
+  const getSingleProduct = (name) => {
+    const singleProduct = products.find(
+      (product) =>
+        product.name.toLowerCase().trim().split(" ").join("") === name
+    );
+    return singleProduct;
+  };
 
   useEffect(() => {
     let filterdProducts = dummyProducts;
@@ -36,6 +42,7 @@ const ProductContextProvider = ({ children }) => {
         setSearchQueryForProduct,
         selectedCategory,
         setSelectedCategory,
+        getSingleProduct,
       }}
     >
       {children}
