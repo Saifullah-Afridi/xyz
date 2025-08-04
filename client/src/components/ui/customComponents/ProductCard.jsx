@@ -3,15 +3,15 @@ import { IoStar } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
 import { useCart } from "../../../context/CartContext";
 import { toast } from "sonner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  const { _id, name, category, price, image, numberOfReviews, offerPrice } =
-    product;
+  const { name, category, price, image, numberOfReviews, offerPrice } = product;
   const [numberOfItems, setNumberOfItems] = useState(1);
   const { addToCart, cartItems } = useCart();
   const currency = import.meta.env.VITE_PRICE;
 
+  const navigate = useNavigate();
   const incrementNumberOfItems = () => {
     setNumberOfItems((prev) => prev + 1);
   };
@@ -29,13 +29,19 @@ const ProductCard = ({ product }) => {
     setNumberOfItems(1);
   };
 
-  return (
-    <Link
-      to={`/product-detail/${category.toLowerCase()}/${name
+  const handleNavigate = () => {
+    navigate(
+      `/product-detail/${category.toLowerCase()}/${name
         .toLowerCase()
         .trim()
         .split(" ")
-        .join("")}`}
+        .join("")}`
+    );
+    window.scroll({ top: 0, behavior: "smooth" });
+  };
+  return (
+    <div
+      onClick={handleNavigate}
       className="border-[1px] sm:border-gray-200 border-gray-400 p-3  rounded-sm hover:shadow-xl cursor-pointer transition-all duration-150 ease-in-out "
     >
       <div className=" flex flex-col items-center">
@@ -69,7 +75,10 @@ const ProductCard = ({ product }) => {
           <div className="flex items-center gap-1">
             <span
               className="border-1 border-gray-200 h-5 w-5 justify-center  flex flex-col items-center rounded-sm cursor-pointer hover:bg-primary hover:text-white select-none "
-              onClick={DecrementNumberOfItems}
+              onClick={(e) => {
+                DecrementNumberOfItems();
+                e.stopPropagation();
+              }}
             >
               -
             </span>
@@ -77,16 +86,20 @@ const ProductCard = ({ product }) => {
 
             <span
               className="border-1 border-gray-200 h-5 w-5 justify-center  flex flex-col items-center rounded-sm cursor-pointer hover:bg-primary hover:text-white select-none "
-              onClick={incrementNumberOfItems}
+              onClick={(e) => {
+                incrementNumberOfItems();
+                e.stopPropagation();
+              }}
             >
               +
             </span>
           </div>
           <button
             className="flex gap-1 items-center bg-primary  px-6 py-1 rounded-md cursor-pointer hover:bg-[#16a34a]  text-white "
-            onClick={() => {
+            onClick={(e) => {
               addItem(numberOfItems);
               toast.success("item added successfully");
+              e.stopPropagation();
             }}
           >
             <IoCartOutline />
@@ -94,7 +107,7 @@ const ProductCard = ({ product }) => {
           </button>
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
