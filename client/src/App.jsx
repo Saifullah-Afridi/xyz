@@ -6,6 +6,10 @@ import AllProducts from "./pages/AllProducts";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
 import MyOders from "./pages/MyOders";
+import SellerDashboard from "./pages/SellerDashboard";
+import AddProduct from "./pages/AddProduct";
+import ProductList from "./pages/ProductList";
+import OrderList from "./pages/OrderList";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -40,6 +44,28 @@ const App = () => {
         {
           path: "my-orders",
           Component: MyOders,
+        },
+        {
+          path: "/seller-dashboard",
+          Component: SellerDashboard,
+          children: [
+            {
+              index: true,
+              Component: AddProduct,
+            },
+            {
+              path: "add-product",
+              Component: AddProduct,
+            },
+            {
+              path: "product-list",
+              Component: ProductList,
+            },
+            {
+              path: "orders-list",
+              Component: OrderList,
+            },
+          ],
         },
       ],
     },
