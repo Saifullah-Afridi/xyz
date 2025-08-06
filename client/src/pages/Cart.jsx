@@ -2,9 +2,15 @@ import { useState } from "react";
 import { useCart } from "../context/CartContext";
 import { CiTrash } from "react-icons/ci";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useOrderContext } from "../context/OrderContext";
+import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cashMethod, setCashMethod] = useState("COD");
+  const [deliveryAddress, setDeliveryAddress] = useState("");
+  const { placeOrder } = useOrderContext();
+
   const {
     deleteFromCart,
     incrementItemFromCart,
@@ -13,12 +19,27 @@ const Cart = () => {
     numberofCartItems,
     clearCart,
     getTotalPrice,
+    setCartItems,
   } = useCart();
 
   const currency = import.meta.env.VITE_PRICE;
 
+  const navigate = useNavigate();
+
   const handleBack = () => {
     window.history.go(-1);
+  };
+  const handleOrder = () => {
+    if (cashMethod === "COD") {
+      if (deliveryAddress === "" || deliveryAddress === undefined) {
+        toast.error("Please provide the address");
+        return;
+      }
+      placeOrder(cartItems, getTotalPrice(), cashMethod, deliveryAddress);
+      clearCart();
+      toast.success("Your order has been placed");
+      navigate("/my-orders");
+    }
   };
 
   return (
@@ -120,7 +141,14 @@ const Cart = () => {
               <span className="text-body-text font-semibold text-[16px]">
                 DELIVERY ADDRESS
               </span>
-              <select className="outline-1 outline-gray-200 py-2 cursor-pointer rounded-sm">
+              <select
+                className="outline-1 outline-gray-200 py-2 cursor-pointer rounded-sm"
+                value={deliveryAddress}
+                onChange={(e) => setDeliveryAddress(e.target.value)}
+              >
+                <option value="" className="cursor-pointer">
+                  Please select your address
+                </option>
                 <option value="Shiekh abad" className="cursor-pointer">
                   Shiekh abad
                 </option>
@@ -172,7 +200,10 @@ const Cart = () => {
                   </span>
                 </div>
               </div>
-              <button className="bg-primary py-2 text-white hover:bg-green-600 cursor-pointer my-4 rounded-md">
+              <button
+                className="bg-primary py-2 text-white hover:bg-green-600 cursor-pointer my-4 rounded-md"
+                onClick={handleOrder}
+              >
                 {cashMethod === "COD" ? "Place Order" : "Proceed with Order"}
               </button>
             </div>
