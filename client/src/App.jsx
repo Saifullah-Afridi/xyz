@@ -5,6 +5,7 @@ import Contact from "./pages/Contact";
 import AllProducts from "./pages/AllProducts";
 import Cart from "./pages/Cart";
 import ProductDetail from "./pages/ProductDetail";
+import MyOders from "./pages/MyOders";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -38,7 +39,7 @@ const App = () => {
         },
         {
           path: "my-orders",
-          Component: Cart,
+          Component: MyOders,
         },
       ],
     },
