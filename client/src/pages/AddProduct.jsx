@@ -21,11 +21,6 @@ const AddProduct = () => {
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
-  };
-
   const handleImage = (e) => {
     const file = e.target.files[0];
     const id = e.target.id;
@@ -43,6 +38,20 @@ const AddProduct = () => {
 
   const removeImage = (id) => {
     setImages((prev) => ({ ...prev, [id]: null }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const data = new FormData();
+
+    Object.entries(formData).forEach(([key, value]) => {
+      data.append(key, value);
+    });
+    Object.entries(images).forEach(([key, value]) => {
+      if (value?.file) {
+        data.append("images", value.file);
+      }
+    });
   };
 
   return (
@@ -217,7 +226,7 @@ const AddProduct = () => {
               ProductPrice
             </label>
             <input
-              type="text"
+              type="number"
               value={formData.productPrice}
               onChange={handleInputChange}
               name="productPrice"
@@ -234,7 +243,7 @@ const AddProduct = () => {
               Offer price
             </label>
             <input
-              type="text"
+              type="number"
               value={formData.offerPrice}
               onChange={handleInputChange}
               name=""
