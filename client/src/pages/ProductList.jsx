@@ -1,5 +1,6 @@
 import React from "react";
 import { dummyProducts } from "../assets/assets";
+import ToggleButton from "../components/ui/customComponents/ToggleButton";
 
 const ProductList = () => {
   const currency = import.meta.env.VITE_PRICE;
@@ -34,7 +35,9 @@ const ProductList = () => {
               {product?.price}
               {currency}
             </div>
-            <div>Product</div>
+            <div>
+              <ToggleButton stock={product?.inStock} />
+            </div>
           </div>
         ))}
       </div>

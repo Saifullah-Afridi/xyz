@@ -216,7 +216,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     _id: "gd47g34h",
@@ -265,7 +265,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     _id: "gd50g67h",
@@ -317,7 +317,7 @@ export const dummyProducts = [
     ],
     createdAt: "2025-03-25T07:17:46.018Z",
     updatedAt: "2025-03-25T07:18:13.103Z",
-    inStock: true,
+    inStock: false,
   },
   {
     _id: "ek53j34k",

@@ -36,7 +36,7 @@ const SellerDashboardSidebar = () => {
           to={link?.link}
           key={link.title}
           className={`${
-            isActive(link) ? "border-r-4 border-r-primary" : ""
+            isActive(link) ? "border-r-8 border-r-primary bg-green-100 " : ""
           } flex items-center gap-2 hover:bg-green-100 h-12 px-2 transition-all duration-200 ease-in-out`}
         >
           <span>{link?.icon}</span>
