@@ -16,6 +16,8 @@ const AddProduct = () => {
     picture3: null,
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleInputChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
@@ -40,8 +42,44 @@ const AddProduct = () => {
     setImages((prev) => ({ ...prev, [id]: null }));
   };
 
+  const validate = () => {
+    const newError = {};
+    if (!formData.productName.trim()) {
+      newError.productName = "Product Name is required";
+    }
+
+    if (!formData.description.trim()) {
+      newError.description = "Please provide product description";
+    }
+    if (!formData.category) {
+      newError.category = "Product must have a category";
+    }
+
+    if (!formData.productPrice || formData.productPrice <= 0) {
+      newError.productPrice = "Product Price must be greader then 0 ";
+    }
+
+    if (
+      formData.offerPrice < 0 ||
+      formData.offerPrice < formData.productPrice
+    ) {
+      newError.offerPrice =
+        "Offer Price must be greader then 0 and lesser then product price ";
+    }
+    const hasAtLeastOneImage = Object.values(images).some((img) => img?.file);
+    if (!hasAtLeastOneImage) {
+      newError.images = "At least one image is required";
+    }
+
+    setErrors(newError);
+    return Object.keys(newError).length === 0;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!validate()) {
+      return;
+    }
     const data = new FormData();
 
     Object.entries(formData).forEach(([key, value]) => {
@@ -173,6 +211,9 @@ const AddProduct = () => {
             )}
           </div>
         </div>
+        {errors.images && (
+          <div className="text-red-400 text-sm">{errors.images}</div>
+        )}
         <div className="flex flex-col gap-1">
           <label htmlFor="productName" className="text-body-text font-semibold">
             Product Name
@@ -186,6 +227,9 @@ const AddProduct = () => {
             placeholder="Product Name"
             className="border-2 border-gray-300 h-10 p-1"
           />
+          {errors.productName && (
+            <div className="text-red-400 text-sm ">{errors.productName}</div>
+          )}
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="description" className="text-body-text font-semibold">
@@ -200,6 +244,9 @@ const AddProduct = () => {
             placeholder="Description"
             className="border-2 border-gray-300 h-22 p-1"
           ></textarea>
+          {errors.description && (
+            <div className="text-red-400 text-sm">{errors.description}</div>
+          )}
         </div>
         <div className="flex flex-col gap-1">
           <label htmlFor="category" className="text-body-text font-semibold">
@@ -216,6 +263,9 @@ const AddProduct = () => {
             <option value="FRUIT">Fruit</option>
             <option value="FRUIT">Fruit</option>
           </select>
+          {errors.category && (
+            <div className="text-red-400 text-sm">{errors.category}</div>
+          )}
         </div>
         <div className="flex gap-2">
           <div className="flex flex-col gap-1 flex-1">
@@ -234,6 +284,9 @@ const AddProduct = () => {
               placeholder="0"
               className="border-2 border-gray-300 h-10 p-1"
             />
+            {errors.productPrice && (
+              <div className="text-red-400 text-sm">{errors.productPrice}</div>
+            )}
           </div>
           <div className="flex flex-col gap-1 flex-1">
             <label
@@ -251,6 +304,9 @@ const AddProduct = () => {
               placeholder="0"
               className="border-2 border-gray-300 h-10 p-1"
             />
+            {errors.offerPrice && (
+              <div className="text-red-400 text-sm">{errors.offerPrice}</div>
+            )}
           </div>
         </div>
         <button
