@@ -8,3 +8,21 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id Int @id @default(autoincrement())
+  name String 
+  email String @unique
+  password String
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  role USER @default(USER)
+
+  
+  @@map("users")
+}
+
+enum USER {
+  USER
+  SELLER
+}

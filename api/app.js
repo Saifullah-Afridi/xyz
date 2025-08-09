@@ -4,15 +4,19 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
 
+//middlewares
+app.use(express.json());
 app.use(morgan("dev"));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [],
+    origin: ["http://localhost:5173"],
     methods: ["GET", "POST", "UPDATE", "DELETE"],
     Credential: true,
   })
 );
+
+//routes
 
 app.get("/", (req, res) => {
   res.send("welcome to our website");
