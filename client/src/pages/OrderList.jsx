@@ -21,8 +21,10 @@ const SellerOrders = () => {
   };
 
   return (
-    <div className="p-8 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">Seller Orders</h1>
+    <div className="px-10">
+      <h1 className="text-3xl font-semibold text-primary underline underline-offset-8 mb-8">
+        Seller Orders
+      </h1>
 
       <div className="space-y-6">
         {orders.map((order) => (
@@ -30,7 +32,6 @@ const SellerOrders = () => {
             key={order._id}
             className="bg-white border border-gray-200 rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow duration-200"
           >
-            {/* Header */}
             <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
               <div>
                 <p className="text-sm text-gray-500">Order ID:</p>
@@ -46,7 +47,6 @@ const SellerOrders = () => {
               </div>
             </div>
 
-            {/* Items */}
             <div className="mb-4">
               <h3 className="font-medium text-gray-800 mb-2">Items</h3>
               <div className="space-y-1 text-gray-700">
@@ -63,7 +63,6 @@ const SellerOrders = () => {
               </div>
             </div>
 
-            {/* Info Grid */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-gray-700 mb-4">
               <div>
                 <p className="font-semibold text-gray-800">User ID</p>
@@ -81,7 +80,6 @@ const SellerOrders = () => {
               </div>
             </div>
 
-            {/* Address */}
             <div className="mb-4">
               <p className="font-semibold text-gray-800">Shipping Address</p>
               <p className="text-sm text-gray-700">
@@ -90,7 +88,6 @@ const SellerOrders = () => {
               </p>
             </div>
 
-            {/* Status */}
             <div className="flex items-center gap-3">
               <label htmlFor="status" className="font-semibold text-gray-800">
                 Status:
