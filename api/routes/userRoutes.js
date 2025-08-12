@@ -1,11 +1,9 @@
-import { register } from "../controllers/auth.controller"
-import express from express
-const router = express.Router()
+import { register } from "../controllers/auth.controller.js";
+import express from "express";
+const router = express.Router();
+import userSchema from "../utils/userSchema.js";
+import { validator } from "../utils/validator.js";
 
+router.post("/register", validator(userSchema), register);
 
-router.route("/register").post(register)
-
-
-
-
-export default router``
+export default router;

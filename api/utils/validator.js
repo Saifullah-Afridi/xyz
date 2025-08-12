@@ -1,6 +1,7 @@
 export const validator = (schema) => {
   return (req, res, next) => {
-    const result = schema.safeParse(req.body);
+    const strictSchema = schema.strict();
+    const result = strictSchema.safeParse(req.body);
 
     if (!result.success) {
       const errors = formatErrors(result.error.flatten().fieldErrors);
@@ -16,7 +17,7 @@ function formatErrors(fieldErrors) {
   const formatted = {};
   for (const key in fieldErrors) {
     if (fieldErrors[key]?.length) {
-      formatted[key] = fieldErrors[key][0]; // show first error only
+      formatted[key] = fieldErrors[key][0];
     }
   }
   return formatted;

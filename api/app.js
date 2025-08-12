@@ -3,6 +3,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 const app = express();
+import userRoutes from "./routes/userRoutes.js";
 
 //middlewares
 app.use(express.json());
@@ -11,12 +12,14 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: ["http://localhost:5173"],
-    methods: ["GET", "POST", "UPDATE", "DELETE"],
-    Credential: true,
+    methods: ["GET", "POST", "PATCH", "DELETE"],
+    credentials: true,
   })
 );
 
 //routes
+
+app.use("/api/v1/users", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("welcome to our website");
