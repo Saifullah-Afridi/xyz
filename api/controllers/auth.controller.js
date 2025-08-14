@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import hashPassword from "../utils/hashPassword.js";
-import { createToken } from "../utils/jsonWebToken.js";
+import { createToken, verifToken } from "../utils/jsonWebToken.js";
 import { comparePassword } from "../utils/comparePassword.js";
 
 const prisma = new PrismaClient();
@@ -23,6 +23,8 @@ export const register = async (req, res) => {
         name: true,
         email: true,
         role: true,
+        createdAt: true,
+        updateAt: true,
       },
     });
     const token = createToken(user.id, user.email);
@@ -31,7 +33,7 @@ export const register = async (req, res) => {
       maxAge: 60 * 1000 * 15 * 60,
       secure: false,
     });
-    res.status(200).json({
+    res.status(201).json({
       status: "success",
       message: "User has been successfully created",
       user,
@@ -68,7 +70,7 @@ export const login = async (req, res) => {
       });
     }
 
-    const isPasswordMatched = comparePassword(password, user.password);
+    const isPasswordMatched = await comparePassword(password, user.password);
 
     if (!isPasswordMatched) {
       return res.status(401).json({
@@ -76,6 +78,8 @@ export const login = async (req, res) => {
         message: "Please provide correct credientails",
       });
     }
+
+    const { password: userPassword, ...userDetails } = user;
     const token = createToken(user.id, user.email);
     res.cookie("token", token, {
       httpOnly: true,
@@ -84,8 +88,58 @@ export const login = async (req, res) => {
     });
     res.status(200).json({
       status: "success",
-      user,
+      user: userDetails,
       token,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: "Something went wrong",
+    });
+  }
+};
+
+export const protectedRoute = async (req, res, next) => {
+  try {
+    let token;
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer")
+    ) {
+      token = req.headers.authorization.split(" ")[1];
+    }
+
+    if (!token && req.cookies.token) {
+      token = req.cookies.token;
+    }
+
+    if (!token) {
+      return res.status(401).json({ message: "Please login and try again" });
+    }
+
+    const data = verifToken(token);
+    const user = await prisma.user.findUnique({
+      where: {
+        id: data.id,
+        email: data.email,
+      },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        createdAt: true,
+        updateAt: true,
+      },
+    });
+
+    req.user = user;
+    next();
+  } catch (error) {
+    res.status(500).json({
+      status: "fail",
+      message: "something went wrong,try again later",
+      error: error,
+    });
+  }
 };

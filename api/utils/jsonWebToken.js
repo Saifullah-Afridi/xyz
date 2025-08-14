@@ -6,3 +6,12 @@ export const createToken = (id, email) => {
   });
   return generatedToken;
 };
+
+export const verifToken = (token) => {
+  try {
+    const decoded = jwt.verify(token, process.env.PRIVATE_KEY);
+    return decoded;
+  } catch (error) {
+    return null;
+  }
+};
